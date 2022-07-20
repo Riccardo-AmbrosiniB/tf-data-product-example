@@ -1,0 +1,1 @@
+variable "lake_name" {}
