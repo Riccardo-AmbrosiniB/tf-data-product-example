@@ -5,11 +5,16 @@ terraform {
         version = "~> 3.0"
     }
   }
+  backend "s3" {
+    bucket = "dp-deployments"
+    region = "eu-south-1"
+    profile = "quantyca-gian"
+  }
 }
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "eu-south-1"
+  region = var.region
   profile = "quantyca-gian"
 }
 
