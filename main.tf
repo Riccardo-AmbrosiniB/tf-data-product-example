@@ -6,9 +6,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "dp-deployments"
+    bucket = "quantyca-dp-deployments"
     region = "eu-south-1"
     profile = "quantyca-gian"
+    key = "terraform.state"
   }
 }
 
