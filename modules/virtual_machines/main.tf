@@ -29,7 +29,7 @@ resource "azurerm_linux_virtual_machine" "odm_demo" {
   name                  = "odm_demo"
   network_interface_ids = [azurerm_network_interface.odm_demo_nic.id]
   resource_group_name   = var.resource_group_name
-  size               = "Standard_D8as_v5"
+  size               = "Standard_A2_v2"
   //timezone = "W. Europe Standard Time"
 
   admin_ssh_key {
