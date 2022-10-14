@@ -1,5 +1,5 @@
-output "vmPublicIp" {
-  value = module.virtual_machines.vmPublicIp
+output "vmPrivateIp" {
+  value = module.virtual_machines.vmPrivateIp
 }
 
 #output "devDataLakeEndpoint" {
