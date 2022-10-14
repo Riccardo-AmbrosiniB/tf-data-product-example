@@ -1,12 +1,12 @@
-output "productionDataLakeEndpoint" {
-  value = module.datalake.productionDataLakeEndpoint
+output "vmId" {
+  value = module.virtual_machines.vmId
 }
 
-output "devDataLakeEndpoint" {
-  value = module.datalake.devDataLakeEndpoint
-}
+#output "devDataLakeEndpoint" {
+#  value = module.datalake.devDataLakeEndpoint
+#}
 
-output "rawDataLakeEndpoint" {
-  value = module.datalake.rawDataLakeEndpoint
-}
+#output "rawDataLakeEndpoint" {
+#  value = module.datalake.rawDataLakeEndpoint
+#}
 
