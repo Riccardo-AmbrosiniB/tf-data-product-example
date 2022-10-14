@@ -47,7 +47,7 @@ resource "azurerm_linux_virtual_machine" "odm_demo" {
   os_disk {
     name              = "odm_demo_disk_os"
     caching           = "ReadWrite"
-    storage_account_type = "StandardSSD_ZRS"
+    storage_account_type = "StandardSSD_LRS"
   }
 
   computer_name  = "odmdemo"
