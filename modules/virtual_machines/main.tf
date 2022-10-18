@@ -6,10 +6,17 @@ resource "azurerm_virtual_network" "odm_demo" {
 }
 
 resource "azurerm_subnet" "odm_demo_subnet" {
-  name                 = "internal"
+  name                 = "odm_demo_subnet"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.odm_demo.name
   address_prefixes     = ["10.0.2.0/24"]
+}
+
+resource "azurerm_public_ip" "odm_demo_public_ip" {
+  name                = "odm_demo_public_ip"
+  resource_group_name = var.resource_group_name
+  location            = var.region
+  allocation_method   = "Static"
 }
 
 
@@ -21,7 +28,31 @@ resource "azurerm_network_interface" "odm_demo_nic" {
     name                          = "odm_demo_nic_configuration"
     subnet_id = azurerm_subnet.odm_demo_subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.odm_demo_public_ip.id
   }
+}
+
+resource "azurerm_network_security_group" "odm_demo_nic_security_group" {
+  name                = "odm_demo_nic_security_group"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  security_rule {
+    name                       = "allowSSH"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "151.66.84.61/32"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_interface_application_security_group_association" "example" {
+  network_interface_id          = azurerm_network_interface.odm_demo_nic.id
+  application_security_group_id = azurerm_application_security_group.odm_demo_nic_security_group.id
 }
 
 resource "azurerm_linux_virtual_machine" "odm_demo" {
