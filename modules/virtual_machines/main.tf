@@ -50,7 +50,7 @@ resource "azurerm_network_security_group" "odm_demo_nic_security_group" {
   }
 }
 
-resource "azurerm_network_interface_application_security_group_association" "example" {
+resource "azurerm_network_interface_security_group_association" "odm_demo_nic_security_group_association" {
   network_interface_id          = azurerm_network_interface.odm_demo_nic.id
   application_security_group_id = azurerm_application_security_group.odm_demo_nic_security_group.id
 }
