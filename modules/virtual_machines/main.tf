@@ -34,8 +34,8 @@ resource "azurerm_network_interface" "odm_demo_nic" {
 
 resource "azurerm_network_security_group" "odm_demo_nic_security_group" {
   name                = "odm_demo_nic_security_group"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = var.region
+  resource_group_name = var.resource_group_name
 
   security_rule {
     name                       = "allowSSH"
