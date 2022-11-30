@@ -3,6 +3,12 @@ resource "azurerm_virtual_network" "odm_demo" {
   address_space       = ["10.0.0.0/16"]
   location            = var.region
   resource_group_name = var.resource_group_name
+  timeouts {
+    create = "15s"
+    delete = "15s"
+    read = "15s"
+    update = "15s"
+  }
 }
 
 resource "azurerm_subnet" "odm_demo_subnet" {
@@ -10,6 +16,12 @@ resource "azurerm_subnet" "odm_demo_subnet" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.odm_demo.name
   address_prefixes     = ["10.0.2.0/24"]
+  timeouts {
+    create = "5s"
+    delete = "5s"
+    read = "5s"
+    update = "5s"
+  }
 }
 
 resource "azurerm_public_ip" "odm_demo_public_ip" {
@@ -17,6 +29,12 @@ resource "azurerm_public_ip" "odm_demo_public_ip" {
   resource_group_name = var.resource_group_name
   location            = var.region
   allocation_method   = "Static"
+  timeouts {
+    create = "5s"
+    delete = "5s"
+    read = "5s"
+    update = "5s"
+  }
 }
 
 
@@ -29,6 +47,12 @@ resource "azurerm_network_interface" "odm_demo_nic" {
     subnet_id = azurerm_subnet.odm_demo_subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = azurerm_public_ip.odm_demo_public_ip.id
+  }
+  timeouts {
+    create = "5s"
+    delete = "5s"
+    read = "5s"
+    update = "5s"
   }
 }
 
@@ -48,11 +72,23 @@ resource "azurerm_network_security_group" "odm_demo_nic_security_group" {
     source_address_prefix      = "151.66.84.61/32"
     destination_address_prefix = "*"
   }
+  timeouts {
+    create = "5s"
+    delete = "5s"
+    read = "5s"
+    update = "5s"
+  }
 }
 
 resource "azurerm_network_interface_security_group_association" "odm_demo_nic_security_group_association" {
   network_interface_id          = azurerm_network_interface.odm_demo_nic.id
   network_security_group_id = azurerm_network_security_group.odm_demo_nic_security_group.id
+  timeouts {
+    create = "5s"
+    delete = "5s"
+    read = "5s"
+    update = "5s"
+  }
 }
 
 resource "azurerm_linux_virtual_machine" "odm_demo" {
@@ -83,4 +119,11 @@ resource "azurerm_linux_virtual_machine" "odm_demo" {
 
   computer_name  = "odmdemo"
   admin_username = "giandomenico.avelluto"
+
+  timeouts {
+    create = "5s"
+    delete = "5s"
+    read = "5s"
+    update = "5s"
+  }
 }
