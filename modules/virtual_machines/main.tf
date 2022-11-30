@@ -4,10 +4,10 @@ resource "azurerm_virtual_network" "odm_demo" {
   location            = var.region
   resource_group_name = var.resource_group_name
   timeouts {
-    create = "15s"
-    delete = "15s"
-    read = "15s"
-    update = "15s"
+    create = "5s"
+    delete = "5s"
+    read = "5s"
+    update = "5s"
   }
 }
 
